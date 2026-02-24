@@ -1,16 +1,30 @@
-git# This is a sample Python script.
+import scripts
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Словарь соответствия номера и функции
+tasks = {
+    1: scripts.skript_1,
+    2: scripts.skript_2,
+    3: scripts.skript_3,
+    4: scripts.skript_4
+}
 
+def show_menu():
+    print("\nВыберите скрипт (1-16):")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+while True:
+    show_menu()
 
+    try:
+        choice = int(input("Введите номер: "))
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+        if choice == 0:
+            print("Выход...")
+            break
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        if choice in tasks:
+            tasks[choice]()
+        else:
+            print("Ошибка: Такого скрипта нет.")
+
+    except ValueError:
+        print("Ошибка: Введите число.")

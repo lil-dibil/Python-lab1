@@ -1,0 +1,13 @@
+# Виртуальное окружение
+.venv/
+.env/
+
+# PyCharm
+.idea/
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Логи
+*.log
