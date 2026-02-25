@@ -5,7 +5,11 @@ tasks = {
     1: scripts.skript_1,
     2: scripts.skript_2,
     3: scripts.skript_3,
-    4: scripts.skript_4
+    4: scripts.skript_4,
+    5: scripts.skript_5,
+    6: scripts.skript_6,
+    7: scripts.skript_7,
+    8: scripts.skript_8
 }
 
 def show_menu():
