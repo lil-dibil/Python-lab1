@@ -1,3 +1,8 @@
+import random
+import itertools
+from datetime import datetime, timedelta
+
+
 def skript_1():  # скрипт № 1
     print("Запущен скрипт 1")
     try:
@@ -63,16 +68,14 @@ def skript_5():  # скрипт № 5
     new_words = []
 
     for word in words:
-        # Проверяем слово без запятой в конце
-        clean_word = word.strip(",")
+        clean_word = word.strip(",")  # проверяем слово без запятой в конце
 
         if clean_word and clean_word[0].isupper():
             new_word = clean_word.upper()
         else:
             new_word = clean_word
 
-        # Возвращаем запятую, если она была
-        if word.endswith(","):
+        if word.endswith(","):  # возвращаем запятую, если она была
             new_word += ","
 
         new_words.append(new_word)
@@ -100,7 +103,7 @@ def skript_7():  # скрипт № 7
     addresses = [
         "www.google",
         "www.youtube.com",
-        "privet"
+        "privet",
         "example.com",
         "www.github",
         "cool_site"
@@ -111,8 +114,7 @@ def skript_7():  # скрипт № 7
         for addr in addresses
     ]
 
-    # Теперь проверяем окончание .com
-    new_addresses = [
+    new_addresses = [  # теперь проверяем окончание .com
         (addr if addr.endswith(".com") else addr + ".com")
         for addr in new_addresses
     ]
@@ -133,8 +135,7 @@ def skript_8():  # скрипт № 8
 
     array = [random.randint(0, 100) for _ in range(n)]
 
-    # Находим ближайшую степень двойки
-    power = 1
+    power = 1  # находим ближайшую степень двойки
     while power < n:
         power *= 2
 
@@ -163,7 +164,6 @@ def skript_9():  # скрипт № 9
         if amount <= 0:
             raise ValueError
 
-        original_amount = amount
         result = []
 
         for bill in sorted(atm.keys(), reverse=True):
@@ -238,3 +238,80 @@ signal = list(range(20))
 
 def extra_enumerate(x):  # скрипт № 13
     print("Запущен скрипт 13")
+    total = sum(x)
+    cumulative = 0
+
+    for i, elem in enumerate(x):
+        cumulative += elem
+        frac = cumulative / total if total != 0 else 0
+        yield i, elem, cumulative, round(frac, 3)
+
+
+def non_empty(func):  # скрипт № 14
+
+    def wrapper(*args, **kwargs):
+        print("Запущен скрипт 14")
+        result = func(*args, **kwargs)
+        if isinstance(result, list):
+            result = [x for x in result if x not in ("", None)]
+        return result
+
+    return wrapper
+
+
+@non_empty
+def get_pages():  # пример функции
+    return ['chapter1', '', 'contents', None, 'line1']
+
+
+def pre_process(a=0.97):  # скрипт № 15
+
+    def decorator(func):
+        def wrapper(s):
+            print("Запущен скрипт 15")
+            s_filtered = s.copy()
+            for i in range(1, len(s_filtered)):
+                s_filtered[i] = s_filtered[i] - a * s_filtered[i - 1]
+            return func(s_filtered)
+
+        return wrapper
+
+    return decorator
+
+
+@pre_process(a=0.93)
+def plot_signal(s):  # пример функции
+    for sample in s:
+        print(sample)
+
+
+def football_groups():  # скрипт № 16
+    print("Запущен скрипт 16")
+    teams = [
+        "Team1", "Team2", "Team3", "Team4",
+        "Team5", "Team6", "Team7", "Team8",
+        "Team9", "Team10", "Team11", "Team12",
+        "Team13", "Team14", "Team15", "Team16"
+    ]
+
+    random.shuffle(teams)  # перемешиваем и делим на 4 группы по 4 команды
+    groups = [teams[i * 4:(i + 1) * 4] for i in range(4)]
+
+    print("Группы:")
+    for i, g in enumerate(groups, 1):
+        print(f"Группа {i}: {g}")
+
+    start_date = datetime(datetime.today().year, 9, 14)
+    possible_times = [(18, 0), (20, 0), (22, 45)]
+
+    for group in groups:  # в каждой группе все команды играют между собой
+        matches = list(itertools.combinations(group, 2))
+
+        for match in matches:
+            hour, minute = random.choice(possible_times)
+            game_date = start_date.replace(hour=hour, minute=minute)
+
+            print(f"{game_date.strftime('%d/%m/%Y, %H:%M')}: "
+                  f"{match[0]} vs {match[1]}")
+
+            start_date += timedelta(weeks=2)

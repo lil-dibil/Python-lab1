@@ -12,18 +12,17 @@ tasks = {
     8: scripts.skript_8,
     9: scripts.skript_9,
     10: scripts.skript_10,
-
     11: lambda: print(list(scripts.frange(0, 6, 0.2))),
-
-    12: lambda: [
-        print(frame)
-        for frame in scripts.get_frames(list(range(20)), size=8, overlap=0.5)
-    ]
+    12: lambda: [print(frame) for frame in scripts.get_frames(list(range(20)), size=8, overlap=0.5)],
+    13: lambda: [print(data) for data in scripts.extra_enumerate([1, 3, 4, 2])],
+    14: lambda: print(scripts.get_pages()),
+    15: lambda: scripts.plot_signal([10, 20, 15, 30, 25]),
+    16: lambda: scripts.football_groups()
 }
 
 
 def show_menu():
-    print("\nВыберите скрипт (1-16):")
+    print("\nВыберите скрипт (1-16), 0 — выход:")
 
 
 while True:
